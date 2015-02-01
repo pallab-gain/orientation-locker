@@ -1,12 +1,16 @@
 package warwagondev.com.orientationlocker;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.ToggleButton;
+
+import MyUtils.Constants;
+import forgroundservicepkg.OrientationServiceManager;
 
 
 public class MainActivity extends Activity {
@@ -56,7 +60,17 @@ public class MainActivity extends Activity {
         toggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                if (((ToggleButton) v).isChecked()) {
+                    Intent startIntent = new Intent(MainActivity.this,
+                            OrientationServiceManager.class);
+                    startIntent.setAction(Constants.ACTION.STARTFOREGROUND_ACTION);
+                    startService(startIntent);
+                } else {
+                    Intent endIntent = new Intent(MainActivity.this,
+                            OrientationServiceManager.class);
+                    endIntent.setAction(Constants.ACTION.STOPFOREGROUND_ACTION);
+                    startService(endIntent);
+                }
             }
         });
         /*
