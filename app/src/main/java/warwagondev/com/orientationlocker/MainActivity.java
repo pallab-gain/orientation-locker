@@ -1,24 +1,69 @@
 package warwagondev.com.orientationlocker;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import MyUtils.Constants;
-import forgroundservicepkg.OrientationServiceManager;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.ToggleButton;
 
 
 public class MainActivity extends Activity {
+
+    private RadioButton landscape;
+    private RadioButton revLandscape;
+    private RadioButton portrait;
+    private RadioButton revPortrait;
+    private ToggleButton toggleButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        landscape = (RadioButton)findViewById(R.id.radioButton);
+        revLandscape = (RadioButton)findViewById(R.id.radioButton2);
+        portrait = (RadioButton)findViewById(R.id.radioButton3);
+        revPortrait = (RadioButton)findViewById(R.id.radioButton4);
+
+        toggleButton = (ToggleButton)findViewById(R.id.toggleButton);
+
+        landscape.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        revLandscape.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        portrait.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        revPortrait.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        toggleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
+        /*
         Intent intent = new Intent(MainActivity.this, OrientationServiceManager.class);
         intent.setAction(Constants.ACTION.STARTFOREGROUND_ACTION);
         startService(intent);
+        */
     }
 
 
