@@ -16,7 +16,7 @@ import MyUtils.Preference;
 import warwagondev.com.orientationlocker.MainActivity;
 import warwagondev.com.orientationlocker.R;
 
-public class OrientationServiceManager extends Service {
+public class  OrientationServiceManager extends Service {
     public OrientationServiceManager() {
     }
 
@@ -62,10 +62,18 @@ public class OrientationServiceManager extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
         if (intent.getAction().equals(Constants.ACTION.STARTFOREGROUND_ACTION) || intent.getAction().equals(Constants.ACTION.BOOT_RECEIVE)) {
+            Preference.getInstance(getApplicationContext()).setServiceStatus(true);
             final int orientation = Preference.getInstance(getApplicationContext()).getCurrent_orientation();
-            if(orientation!= Preference.getInstance(getApplicationContext()).UNDEFINED){
+            if (orientation != Preference.getInstance(getApplicationContext()).UNDEFINED) {
                 layoutParams.screenOrientation = orientation;
+            } else {
+                try {
+                    windowManager.removeView(mOverlayView);
+                } catch (Exception e) {
+                    ;
+                }
             }
             try {
                 windowManager.removeView(mOverlayView);
@@ -74,6 +82,31 @@ public class OrientationServiceManager extends Service {
             } finally {
                 windowManager.addView(mOverlayView, layoutParams);
             }
+        } else if (intent.getAction().equals(Constants.ACTION.SET_ORIENTATION)) {
+            final int orientation = Preference.getInstance(getApplicationContext()).getCurrent_orientation();
+            if (orientation != Preference.getInstance(getApplicationContext()).UNDEFINED) {
+                layoutParams.screenOrientation = orientation;
+            } else {
+                windowManager.removeView(mOverlayView);
+            }
+            try {
+                windowManager.removeView(mOverlayView);
+            } catch (Exception e) {
+                ;
+            } finally {
+                windowManager.addView(mOverlayView, layoutParams);
+            }
+
+        } else if (intent.getAction().equals(Constants.ACTION.STOPFOREGROUND_ACTION)) {
+            try {
+                windowManager.removeView(mOverlayView);
+            } catch (Exception e) {
+                ;
+            }
+            Preference.getInstance(getApplicationContext()).setServiceStatus(false);
+            Preference.getInstance(getApplicationContext()).setCurrent_orientation(Preference.getInstance(getApplicationContext()).UNDEFINED);
+            stopForeground(true);
+            stopSelf();
         }
         return START_STICKY;
     }
@@ -95,7 +128,8 @@ public class OrientationServiceManager extends Service {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
-    private enum ORIENTATION{
+
+    private enum ORIENTATION {
         LANDSCAPE,
     }
 }

@@ -25,9 +25,17 @@ public class Preference {
     public int getCurrent_orientation(){
         return sharedpreferences.getInt("current_orientation", UNDEFINED);
     }
+    public boolean getServiceStatus(){
+        return sharedpreferences.getBoolean("service_status", false);
+    }
+    public void setServiceStatus(boolean status){
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putBoolean("service_status",status);
+        editor.commit();
+    }
     public void setCurrent_orientation(int orientation){
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putLong("current_orientation",orientation);
+        editor.putInt("current_orientation",orientation);
         editor.commit();
     }
 

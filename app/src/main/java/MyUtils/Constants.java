@@ -10,6 +10,7 @@ public class Constants {
         public static String BOOT_RECEIVE = "action_run_bootcomplete";
         public static String STARTFOREGROUND_ACTION = "action_run_start_forgraound";
         public static String STOPFOREGROUND_ACTION = "action_run_stop_forground";
+        public static String SET_ORIENTATION = "action_run_set_orientation";
     }
 
     public interface NOTIFICATION_ID {

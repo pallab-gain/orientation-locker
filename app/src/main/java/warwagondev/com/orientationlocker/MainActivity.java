@@ -2,6 +2,7 @@ package warwagondev.com.orientationlocker;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.ToggleButton;
 
 import MyUtils.Constants;
+import MyUtils.Preference;
 import forgroundservicepkg.OrientationServiceManager;
 
 
@@ -32,29 +34,66 @@ public class MainActivity extends Activity {
         revPortrait = (RadioButton)findViewById(R.id.radioButton4);
 
         toggleButton = (ToggleButton)findViewById(R.id.toggleButton);
+        toggleButton.setChecked(  Preference.getInstance(getApplicationContext()).getServiceStatus() );
 
         landscape.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent startIntent = new Intent(MainActivity.this,
+                        OrientationServiceManager.class);
+                startIntent.setAction(Constants.ACTION.SET_ORIENTATION);
+                if( Preference.getInstance(getApplicationContext()).getServiceStatus() ) {
+                    Preference.getInstance(getApplicationContext()).setCurrent_orientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    disableOthers(1);
+                    startService(startIntent);
+                }else{
+                    disableOthers(5);
+                }
             }
         });
         revLandscape.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent startIntent = new Intent(MainActivity.this,
+                        OrientationServiceManager.class);
+                startIntent.setAction(Constants.ACTION.SET_ORIENTATION);
+                if( Preference.getInstance(getApplicationContext()).getServiceStatus() ) {
+                    Preference.getInstance(getApplicationContext()).setCurrent_orientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
+                    disableOthers(2);
+                    startService(startIntent);
+                }else{
+                    disableOthers(5);
+                }
             }
         });
         portrait.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent startIntent = new Intent(MainActivity.this,
+                        OrientationServiceManager.class);
+                startIntent.setAction(Constants.ACTION.SET_ORIENTATION);
+                if( Preference.getInstance(getApplicationContext()).getServiceStatus() ) {
+                    Preference.getInstance(getApplicationContext()).setCurrent_orientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    disableOthers(3);
+                    startService(startIntent);
+                }else{
+                    disableOthers(5);
+                }
             }
         });
         revPortrait.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent startIntent = new Intent(MainActivity.this,
+                        OrientationServiceManager.class);
+                startIntent.setAction(Constants.ACTION.SET_ORIENTATION);
+                if( Preference.getInstance(getApplicationContext()).getServiceStatus() ) {
+                    Preference.getInstance(getApplicationContext()).setCurrent_orientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+                    disableOthers(4);
+                    startService(startIntent);
+                }else{
+                    disableOthers(5);
+                }
             }
         });
         toggleButton.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +105,7 @@ public class MainActivity extends Activity {
                     startIntent.setAction(Constants.ACTION.STARTFOREGROUND_ACTION);
                     startService(startIntent);
                 } else {
+                    disableOthers(5);
                     Intent endIntent = new Intent(MainActivity.this,
                             OrientationServiceManager.class);
                     endIntent.setAction(Constants.ACTION.STOPFOREGROUND_ACTION);
@@ -73,11 +113,6 @@ public class MainActivity extends Activity {
                 }
             }
         });
-        /*
-        Intent intent = new Intent(MainActivity.this, OrientationServiceManager.class);
-        intent.setAction(Constants.ACTION.STARTFOREGROUND_ACTION);
-        startService(intent);
-        */
     }
 
 
@@ -101,5 +136,37 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private void disableOthers(int cur){
+        switch (cur){
+            case 0:
+                break;
+            case 1:
+                revLandscape.setChecked(false);
+                portrait.setChecked(false);
+                revPortrait.setChecked(false);
+                break;
+            case 2:
+                landscape.setChecked(false);
+                portrait.setChecked(false);
+                revPortrait.setChecked(false);
+                break;
+            case 3:
+                landscape.setChecked(false);
+                revLandscape.setChecked(false);
+                revPortrait.setChecked(false);
+                break;
+            case 4:
+                landscape.setChecked(false);
+                revLandscape.setChecked(false);
+                portrait.setChecked(false);
+            default:
+                landscape.setChecked(false);
+                revLandscape.setChecked(false);
+                portrait.setChecked(false);
+                revPortrait.setChecked(false);
+                break;
+
+        }
     }
 }
