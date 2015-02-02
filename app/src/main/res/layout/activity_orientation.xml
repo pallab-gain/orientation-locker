@@ -1,0 +1,193 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff" >
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/relativeFirst"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView2"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignLeft="@+id/textView1"
+                android:layout_alignStart="@+id/textView1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Landscape"
+                    android:layout_weight=".70"
+                    android:layout_marginLeft="40dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="#ff142e17"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/radioButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RadioButton"
+                    android:gravity="center|left" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/RelativeLayout01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relativeFirst"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignLeft="@+id/relativeFirst"
+                android:layout_alignStart="@+id/relativeFirst"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/TextView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Reverse Landscape"
+                    android:gravity="left"
+                    android:layout_weight=".70"
+                    android:layout_marginLeft="40dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="#ff142e17"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/RadioButton01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:text="RadioButton"
+                    android:gravity="right|end" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/RelativeLayout02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/RelativeLayout01"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_alignRight="@+id/RelativeLayout01"
+                android:layout_alignEnd="@+id/RelativeLayout01"
+                android:layout_alignLeft="@+id/RelativeLayout01"
+                android:layout_alignStart="@+id/RelativeLayout01"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/TextView02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Portrait"
+                    android:layout_weight=".70"
+                    android:layout_marginLeft="40dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="#ff142e17"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/RadioButton02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:text="RadioButton" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/RelativeLayout03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/RelativeLayout02"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_alignRight="@+id/RelativeLayout02"
+                android:layout_alignEnd="@+id/RelativeLayout02"
+                android:layout_alignLeft="@+id/RelativeLayout02"
+                android:layout_alignStart="@+id/RelativeLayout02"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/TextView03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Reverse Portrait"
+                    android:layout_weight=".70"
+                    android:layout_marginLeft="40dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="#ff142e17"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/RadioButton03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:text="RadioButton" />
+            </LinearLayout>
+
+            <ToggleButton
+                android:id="@+id/toggleButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/RelativeLayout03"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:text="Lock Orientation" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="10dp"
+                android:text="Orientation : Default"
+                android:textColor="#ff181818"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/textView1"
+                android:layout_marginTop="10dp"
+                android:background="#000000"
+                android:text="TextView" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

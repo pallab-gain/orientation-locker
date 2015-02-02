@@ -1,18 +1,11 @@
 package warwagondev.com.orientationlocker;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.RadioButton;
 import android.widget.ToggleButton;
-
-import MyUtils.Constants;
-import MyUtils.Preference;
-import forgroundservicepkg.OrientationServiceManager;
 
 
 public class MainActivity extends Activity {
@@ -26,8 +19,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_orientation);
+/*
         landscape = (RadioButton)findViewById(R.id.radioButton);
         revLandscape = (RadioButton)findViewById(R.id.radioButton2);
         portrait = (RadioButton)findViewById(R.id.radioButton3);
@@ -112,7 +105,7 @@ public class MainActivity extends Activity {
                     startService(endIntent);
                 }
             }
-        });
+        });*/
     }
 
 
