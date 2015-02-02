@@ -63,50 +63,45 @@ public class  OrientationServiceManager extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        if (intent.getAction().equals(Constants.ACTION.STARTFOREGROUND_ACTION) || intent.getAction().equals(Constants.ACTION.BOOT_RECEIVE)) {
+        if (intent.getAction().equals(Constants.ACTION.STARTFOREGROUND_ACTION)) {
             Preference.getInstance(getApplicationContext()).setServiceStatus(true);
-            final int orientation = Preference.getInstance(getApplicationContext()).getCurrent_orientation();
-            if (orientation != Preference.getInstance(getApplicationContext()).UNDEFINED) {
-                layoutParams.screenOrientation = orientation;
-            } else {
-                try {
-                    windowManager.removeView(mOverlayView);
-                } catch (Exception e) {
-                    ;
-                }
-            }
-            try {
-                windowManager.removeView(mOverlayView);
-            } catch (Exception e) {
-                ;
-            } finally {
-                windowManager.addView(mOverlayView, layoutParams);
-            }
-        } else if (intent.getAction().equals(Constants.ACTION.SET_ORIENTATION)) {
-            final int orientation = Preference.getInstance(getApplicationContext()).getCurrent_orientation();
-            if (orientation != Preference.getInstance(getApplicationContext()).UNDEFINED) {
-                layoutParams.screenOrientation = orientation;
-            } else {
-                windowManager.removeView(mOverlayView);
-            }
-            try {
-                windowManager.removeView(mOverlayView);
-            } catch (Exception e) {
-                ;
-            } finally {
-                windowManager.addView(mOverlayView, layoutParams);
-            }
-
         } else if (intent.getAction().equals(Constants.ACTION.STOPFOREGROUND_ACTION)) {
             try {
                 windowManager.removeView(mOverlayView);
             } catch (Exception e) {
                 ;
+            }finally {
+                Preference.getInstance(getApplicationContext()).setServiceStatus(false);
+                Preference.getInstance(getApplicationContext()).removeCurrentOrientation();
+                stopForeground(true);
+                stopSelf();
             }
-            Preference.getInstance(getApplicationContext()).setServiceStatus(false);
-            Preference.getInstance(getApplicationContext()).setCurrent_orientation(Preference.getInstance(getApplicationContext()).UNDEFINED);
-            stopForeground(true);
-            stopSelf();
+        }else if (intent.getAction().equals(Constants.ACTION.SET_ORIENTATION)) {
+            final int orientation = intent.getExtras().getInt("current_orientation");
+            if (orientation != Preference.getInstance(getApplicationContext()).getCurrent_orientation()) {
+                //set orientation
+                Preference.getInstance(getApplicationContext()).setCurrent_orientation(orientation);
+                layoutParams.screenOrientation = orientation;
+                try{
+                    windowManager.updateViewLayout(mOverlayView,layoutParams);
+                }catch (Exception e){
+                    windowManager.addView(mOverlayView,layoutParams);
+                }
+            }
+
+        } else if (intent.getAction().equals(Constants.ACTION.BOOT_RECEIVE)) {
+            final int orientation = intent.getExtras().getInt("current_orientation");
+            if (orientation != Preference.getInstance(getApplicationContext()).getCurrent_orientation()) {
+                //set orientation
+                Preference.getInstance(getApplicationContext()).setCurrent_orientation(orientation);
+                layoutParams.screenOrientation = orientation;
+                try{
+                    windowManager.updateViewLayout(mOverlayView,layoutParams);
+                }catch (Exception e){
+                    windowManager.addView(mOverlayView,layoutParams);
+                }
+            }
+
         }
         return START_STICKY;
     }
@@ -121,6 +116,8 @@ public class  OrientationServiceManager extends Service {
                 ;
             }
         }
+        Preference.getInstance(getApplicationContext()).setServiceStatus(false);
+        Preference.getInstance(getApplicationContext()).removeCurrentOrientation();
     }
 
     @Override
@@ -129,7 +126,4 @@ public class  OrientationServiceManager extends Service {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    private enum ORIENTATION {
-        LANDSCAPE,
-    }
 }
