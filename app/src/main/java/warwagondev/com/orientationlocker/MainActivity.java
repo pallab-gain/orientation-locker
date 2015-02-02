@@ -17,12 +17,6 @@ import forgroundservicepkg.OrientationServiceManager;
 
 public class MainActivity extends Activity {
 
-    private RadioButton landscape;
-    private RadioButton revLandscape;
-    private RadioButton portrait;
-    private RadioButton revPortrait;
-    
-    
     private RadioButton[] radioButtons= new RadioButton[4];
     private ToggleButton toggleButton;
     final int[] buttonIDS = {R.id.RadioButton01,R.id.RadioButton02,R.id.RadioButton03,R.id.RadioButton04};
@@ -80,7 +74,7 @@ public class MainActivity extends Activity {
     }
     private void restoreToLastSaveState(){
         for (int i = 0; i < 4; ++i) {
-            if( i == Preference.getInstance(getApplicationContext()).getCurrent_orientation() ){
+            if( ORIENTATION[i] == Preference.getInstance(getApplicationContext()).getCurrent_orientation() ){
                 radioButtons[i].setChecked(true);
             }else{
                 radioButtons[i].setChecked(false);
