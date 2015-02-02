@@ -163,8 +163,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/RelativeLayout03"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:text="Lock Orientation" />
+                android:layout_marginTop="50dp"
+                android:text="Lock Orientation"
+                android:minWidth="200dp"
+                android:textOff="Lock Orientation"
+                android:textOn="Deactive Orientation Lock"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView1"
