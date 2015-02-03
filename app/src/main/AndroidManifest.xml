@@ -3,7 +3,8 @@
     package="warwagondev.com.orientationlocker" >
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -14,6 +15,7 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -25,7 +27,7 @@
         </service>
 
         <receiver
-            android:name="otherreceiverpkg.OtherReceiver"
+            android:name="otherreceiverpkg.BootReceive"
             android:enabled="true"
             android:exported="true" >
             <intent-filter>
