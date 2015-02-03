@@ -51,7 +51,7 @@ public class  OrientationServiceManager extends Service {
         builder.setContentTitle("Orientation Locker")
                 .setTicker("Orientation Locker")
                 .setContentText("Orientation Locker")
-                .setSmallIcon(R.drawable.ic_stat_device_screen_lock_rotation)
+                .setSmallIcon(R.drawable.ic_stat_action_lock_outline)
                 .setWhen(System.currentTimeMillis())
                 .setContentIntent(pendingIntent);
 
