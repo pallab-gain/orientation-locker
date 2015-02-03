@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import MyUtils.Constants;
@@ -22,11 +23,14 @@ public class MainActivity extends Activity {
     final int[] buttonIDS = {R.id.RadioButton01,R.id.RadioButton02,R.id.RadioButton03,R.id.RadioButton04};
     private final int[] ORIENTATION = {ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE,ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE,ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT };
     
+    private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orientation);
-
+        
+        
+        textView = (TextView)findViewById(R.id.textView1);
         toggleButton = (ToggleButton)findViewById(R.id.toggleButton1);
         for(int i=0;i<4;++i){
             radioButtons[i] = (RadioButton)findViewById( buttonIDS[i] );
@@ -38,6 +42,7 @@ public class MainActivity extends Activity {
                             OrientationServiceManager.class);
                     startIntent.setAction(Constants.ACTION.SET_ORIENTATION);
                     if(Preference.getInstance(getApplicationContext()).getServiceStatus()==true){
+                        setCurrentOrientation( ORIENTATION[cur] );
                         startIntent.putExtra("current_orientation", ORIENTATION[cur]);
                         startService(startIntent);
                         for(int j=0;j<4;++j){
@@ -63,6 +68,7 @@ public class MainActivity extends Activity {
                     for(int i=0;i<4;++i){
                         radioButtons[i].setChecked(false);
                     }
+                    setCurrentOrientation( Preference.getInstance(getApplicationContext()).UNDEFINED );
                     
                     Intent endIntent = new Intent(MainActivity.this,
                             OrientationServiceManager.class);
@@ -82,10 +88,35 @@ public class MainActivity extends Activity {
         }
         toggleButton.setChecked(  Preference.getInstance(getApplicationContext()).getServiceStatus()==true );
     }
+    private void setCurrentOrientation(int _orientation){
+        int orientation = Preference.getInstance(getApplicationContext()).UNDEFINED;
+        for(int i=0;i<4;++i){
+            if( _orientation==ORIENTATION[i] ){
+                orientation=i;
+                break;
+            }
+        }
+        if(orientation==0){
+            textView.setText(R.string.one);
+        }else if(orientation==1){
+            textView.setText(R.string.two);
+        }else if(orientation==2){
+            textView.setText(R.string.three);
+        }else if(orientation==3){
+            textView.setText(R.string.four);
+        }else{
+            textView.setText(R.string.zero);
+        }
+        
+    }
     @Override
     protected void onStart() {
         super.onStart();
         restoreToLastSaveState();
+        
+        //set current orientation
+        setCurrentOrientation( Preference.getInstance(getApplicationContext()).getCurrent_orientation() );
+        
     }
 
     @Override

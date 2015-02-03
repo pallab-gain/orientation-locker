@@ -62,7 +62,7 @@ public class  OrientationServiceManager extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.e("OrientationService", "On Boot Receiver "+intent.getAction());
+//        Log.e("OrientationService", "On Boot Receiver "+intent.getAction());
         if (intent.getAction().equals(Constants.ACTION.STARTFOREGROUND_ACTION)) {
             Preference.getInstance(getApplicationContext()).setServiceStatus(true);
         } else if (intent.getAction().equals(Constants.ACTION.STOPFOREGROUND_ACTION)) {

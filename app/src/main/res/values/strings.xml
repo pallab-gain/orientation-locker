@@ -4,10 +4,10 @@
     <string name="app_name">Orientation Locker</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="zero">None</string>
-    <string name="one">Landscape</string>
-    <string name="two">Reverse Landscape</string>
-    <string name="three">Portrait</string>
-    <string name="four">Reverse Portrait</string>
+    <string name="zero">Orientation : Default</string>
+    <string name="one">Orientation : Landscape</string>
+    <string name="two">Orientation : Reverse Landscape</string>
+    <string name="three">Orientation : Portrait</string>
+    <string name="four">Orientation : Reverse Portrait</string>
 
 </resources>
